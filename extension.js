@@ -6,7 +6,7 @@ const decoder = new TextDecoder();
 const header = `// From ${settingName} in User settings. Changes will be overwritten.\n`;
 
 exports.activate = function activate(context) {
-    const target = vscode.Uri.joinPath(context.globalStoreUri, "..", "..", "keybindings.json");
+    const target = vscode.Uri.joinPath(context.globalStorageUri, "..", "..", "keybindings.json");
     let pending = Promise.resolve();
 
     function sync() {
@@ -30,6 +30,7 @@ exports.activate = function activate(context) {
                 await vscode.workspace.fs.writeFile(target, encoder.encode(contents));
             }
         }).catch(console.error);
+        return pending;
     }
 
     context.subscriptions.push(
