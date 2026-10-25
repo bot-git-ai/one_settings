@@ -1,0 +1,6 @@
+.git/**
+.github/**
+.gitignore
+.vscodeignore
+Makefile
+package-lock.json
