@@ -1,0 +1,25 @@
+{
+  "name": "one-settings",
+  "displayName": "One Settings",
+  "version": "0.1.16",
+  "publisher": "wdomitrz",
+  "license": "AGPL-3.0-only",
+  "engines": { "vscode": "^1.100.0" },
+  "main": "./extension.js",
+  "browser": "./extension.js",
+  "extensionKind": ["ui"],
+  "capabilities": { "untrustedWorkspaces": { "supported": true } },
+  "activationEvents": ["onStartupFinished"],
+  "contributes": {
+    "configuration": {
+      "properties": {
+        "oneSettings.keybindings": {
+          "type": "array",
+          "scope": "application",
+          "description": "Replaces Default-profile keybindings on startup or changes to this User setting. Unset leaves the file alone; [] clears it.",
+          "items": { "type": "object" }
+        }
+      }
+    }
+  }
+}
