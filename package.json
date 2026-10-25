@@ -1,24 +1,45 @@
 {
   "name": "one-settings",
   "displayName": "One Settings",
-  "version": "0.1.19",
+  "version": "0.1.20",
   "publisher": "wdomitrz",
   "license": "AGPL-3.0-only",
   "repository": {
     "type": "git",
     "url": "https://github.com/wdomitrz/one_settings"
   },
-  "engines": { "vscode": "^1.100.0" },
-  "main": "./extension.js",
-  "browser": "./extension.js",
-  "extensionKind": ["ui"],
-  "capabilities": { "untrustedWorkspaces": { "supported": true } },
-  "activationEvents": ["onStartupFinished"],
+  "engines": {
+    "vscode": "^1.100.0"
+  },
+  "main": "./dist/extension.js",
+  "browser": "./dist/extension.js",
+  "extensionKind": [
+    "ui"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    }
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
   "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "typecheck": "tsc -p ./ --noEmit",
+    "bundle": "esbuild src/extension.ts --bundle --platform=node --format=cjs --external:vscode --minify --outfile=dist/extension.js",
+    "compile": "npm run typecheck && npm run bundle",
+    "format": "prettier --write package.json package-lock.json tsconfig.json .prettierrc.json README.md src/**/*.ts",
+    "format:check": "prettier --check package.json package-lock.json tsconfig.json .prettierrc.json README.md src/**/*.ts",
+    "test": "npm run compile",
     "package": "vsce package --no-dependencies"
   },
   "devDependencies": {
-    "@vscode/vsce": "^3.9.2"
+    "@types/vscode": "^1.100.0",
+    "@vscode/vsce": "^3.9.2",
+    "esbuild": "^0.25.0",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.2"
   },
   "contributes": {
     "configuration": {
@@ -27,7 +48,9 @@
           "type": "array",
           "scope": "application",
           "description": "Replaces Default-profile keybindings on startup or changes to this User setting. Unset leaves the file alone; [] clears it.",
-          "items": { "type": "object" }
+          "items": {
+            "type": "object"
+          }
         }
       }
     }
