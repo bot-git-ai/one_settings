@@ -1,15 +1,25 @@
 {
   "name": "one-settings",
   "displayName": "One Settings",
-  "version": "0.1.16",
+  "version": "0.1.17",
   "publisher": "wdomitrz",
   "license": "AGPL-3.0-only",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wdomitrz/one_settings"
+  },
   "engines": { "vscode": "^1.100.0" },
   "main": "./extension.js",
   "browser": "./extension.js",
   "extensionKind": ["ui"],
   "capabilities": { "untrustedWorkspaces": { "supported": true } },
   "activationEvents": ["onStartupFinished"],
+  "scripts": {
+    "package": "vsce package --no-dependencies"
+  },
+  "devDependencies": {
+    "@vscode/vsce": "^3.9.2"
+  },
   "contributes": {
     "configuration": {
       "properties": {

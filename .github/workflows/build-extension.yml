@@ -1,0 +1,42 @@
+name: Build and Package Extension
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: "npm"
+
+      - run: npm ci
+
+      - name: Build VSIX package
+        run: make vsix
+
+      - name: Get extension version
+        id: get_version
+        run: |
+          version=$(node -p "require('./package.json').version")
+          echo "ext_version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Upload to GitHub Releases
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.get_version.outputs.ext_version }}
+          name: Release v${{ steps.get_version.outputs.ext_version }}
+          files: "*.vsix"
+          overwrite_files: false
+          draft: false
+          prerelease: false
