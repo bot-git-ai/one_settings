@@ -10,9 +10,7 @@ Set `oneSettings.keybindings` in your User settings (JSON) to the keybindings yo
 
 ```json
 {
-  "oneSettings.keybindings": [
-    { "key": "ctrl+shift+p", "command": "workbench.action.showCommands" }
-  ]
+  "oneSettings.keybindings": [{ "key": "ctrl+shift+p", "command": "workbench.action.showCommands" }]
 }
 ```
 
@@ -20,7 +18,7 @@ On startup, and whenever the setting changes, the extension replaces the Default
 
 ## Install
 
-- From Releases: download the newest VSIX and install it via Extensions → ⋯ → *Install from VSIX…*
+- From Releases: download the newest VSIX and install it via Extensions → ⋯ → _Install from VSIX…_
 - Build it yourself: `npm ci && npm run package` (or `make vsix`)
 
 Every push to the `master` branch is packaged automatically and attached to a GitHub release, tagged after the `package.json` version.

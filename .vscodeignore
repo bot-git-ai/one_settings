@@ -4,3 +4,8 @@
 .vscodeignore
 Makefile
 package-lock.json
+src/**
+*.map
+**/*.map
+tsconfig.json
+.prettierrc.json
